@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const Teleporter = SpriteKind.create()
     export const Teleporter2 = SpriteKind.create()
+    export const decor = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter, function (sprite, otherSprite) {
     if (Lvl == 0) {
@@ -133,6 +134,32 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter, function (sprite, ot
         tiles.setCurrentTilemap(tilemap`level23`)
         mySprite.setPosition(120, 200)
         mySprite2.setPosition(200, 120)
+        Portal = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.decor)
+        animation.runImageAnimation(
+        Portal,
+        assets.animation`myAnim1`,
+        200,
+        true
+        )
+        Portal.setPosition(135, 127)
+        scaling.scaleToPixels(Portal, 25, ScaleDirection.Uniformly, ScaleAnchor.Middle)
     } else {
     	
     }
@@ -316,6 +343,7 @@ let Right = 0
 let Down = 0
 let Up = 0
 let ifyfifrirfryfriyfir: Sprite = null
+let Portal: Sprite = null
 let Spin = 0
 let Spinman: Sprite = null
 let MyEnemy2: Sprite = null
@@ -389,6 +417,7 @@ forever(function () {
 })
 forever(function () {
     controller.moveSprite(mySprite)
+    music.play(music.createSong(hex`0078000408020405001c000f0a006400f4010a00000400000000000000000000000000000000021e0004000800011d14001800012020002400011d28002c00012434003800011d07001c00020a006400f4016400000400000000000000000000000000000000032a000400080001240c001000012a10001400012718001c00012428002c00012738003c0001203c004000012708001c000e050046006603320000040a002d0000006400140001320002010002360000000400012708000c00012410001400012a18001c00012720002400012428002c00012a30003400012738003c0001243c004000012a09010e02026400000403780000040a000301000000640001c80000040100000000640001640000040100000000fa0004af00000401c80000040a00019600000414000501006400140005010000002c0104dc00000401fa0000040a0001c8000004140005d0076400140005d0070000c800029001f40105c201f4010a0005900114001400039001000005c201f4010500058403050032000584030000fa00049001000005c201f4010500058403c80032000584030500640005840300009001049001000005c201f4010500058403c80064000584030500c8000584030000f40105ac0d000404a00f00000a0004ac0d2003010004a00f0000280004ac0d9001010004a00f0000280002d00700040408070f0064000408070000c80003c800c8000e7d00c80019000e64000f0032000e78000000fa00032c01c8000ee100c80019000ec8000f0032000edc000000fa0003f401c8000ea901c80019000e90010f0032000ea4010000fa0001c8000004014b000000c800012c01000401c8000000c8000190010004012c010000c80002c800000404c8000f0064000496000000c80002c2010004045e010f006400042c010000640002c409000404c4096400960004f6090000f40102b80b000404b80b64002c0104f40b0000f401022003000004200300040a000420030000ea01029001000004900100040a000490010000900102d007000410d0076400960010d0070000c800360004000500010a0800090002010a1000110001011800190003010a0b200021000201082800290001013000310002010a3800390002010a`), music.PlaybackMode.UntilDone)
 })
 forever(function () {
     if (controller.A.isPressed()) {
@@ -411,6 +440,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, mySprite, -1000, 0)
+            music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
             pause(200)
         } else if (Down == 1) {
             projectile = sprites.createProjectileFromSprite(img`
@@ -431,6 +461,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, mySprite, 0, 1000)
+            music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
             pause(200)
         } else if (Up == 1) {
             projectile = sprites.createProjectileFromSprite(img`
@@ -451,6 +482,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, mySprite, 0, -1000)
+            music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
             pause(200)
         } else if (Right == 1) {
             projectile = sprites.createProjectileFromSprite(img`
@@ -471,6 +503,7 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `, mySprite, 1000, 0)
+            music.play(music.melodyPlayable(music.pewPew), music.PlaybackMode.InBackground)
             pause(200)
         }
     }
@@ -487,4 +520,9 @@ forever(function () {
 })
 forever(function () {
     music.play(music.createSong(hex`00780004080200`), music.PlaybackMode.UntilDone)
+})
+forever(function () {
+    if (true) {
+    	
+    }
 })
