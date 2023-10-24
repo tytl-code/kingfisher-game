@@ -171,6 +171,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     mySprite2.setImage(assets.image`myImage7`)
     FinalBoss = 1
     Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Projectile)
+    statusbar = statusbars.create(100, 4, StatusBarKind.Health)
     if (FinalBoss == 1) {
         while (FinalBoss == 1) {
             pause(500)
@@ -322,6 +323,8 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, 
     mySprite2.setImage(assets.image`myImage7`)
     Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Projectile)
     FinalBoss = 1
+    statusbar = statusbars.create(100, 4, StatusBarKind.Health)
+    statusbar.positionDirection(CollisionDirection.Top)
     if (FinalBoss == 1) {
         while (FinalBoss == 1) {
             pause(500)
@@ -416,7 +419,6 @@ forever(function () {
     }
 })
 forever(function () {
-    FinalBoss = 1
     if (controller.up.isPressed()) {
         mySprite.setImage(assets.image`myImage`)
         mySprite.y += -3
@@ -438,7 +440,6 @@ forever(function () {
     }
 })
 forever(function () {
-    light.setMode(NeoPixelMode.RGB)
     if (controller.right.isPressed()) {
         mySprite.setImage(assets.image`s`)
         mySprite.x += 3
