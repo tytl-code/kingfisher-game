@@ -172,16 +172,21 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     FinalBoss = 1
     Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Projectile)
     statusbar = statusbars.create(100, 4, StatusBarKind.Health)
+    statusbar.positionDirection(CollisionDirection.Top)
     if (FinalBoss == 1) {
         while (FinalBoss == 1) {
-            pause(500)
-            Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
+            scene.setBackgroundImage(assets.image`myImage10`)
+            pause(100)
+            scene.setBackgroundImage(assets.image`myImage6`)
+            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Projectile)
+            Boom_Boom.follow(mySprite)
+            pause(2000)
         }
     }
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     if (Boss2 == 1) {
-        sprites.destroy(myEnemy)
+        sprites.destroy(myEnemy, effects.trail, 500)
         tiles.setCurrentTilemap(tilemap`level10`)
         mySprite2.setPosition(130, 250)
         mySprite5 = sprites.create(img`
@@ -241,11 +246,11 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
             `)
-        sprites.destroy(MyEnemy2)
+        sprites.destroy(MyEnemy2, effects.spray, 500)
         mySprite2.setPosition(0, 120)
         Boss3 = 0
     } else if (Spin == 1) {
-        sprites.destroy(Spinman)
+        sprites.destroy(Spinman, effects.spray, 500)
         tiles.setCurrentTilemap(tilemap`level20`)
         mySprite2.setPosition(90, 15)
         mySprite2.setImage(img`
@@ -267,7 +272,7 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
             6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
             `)
     } else {
-        sprites.destroy(mySprite3)
+        sprites.destroy(mySprite3, effects.rings, 500)
         tiles.setCurrentTilemap(tilemap`level0`)
         mySprite5 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
@@ -327,8 +332,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, 
     statusbar.positionDirection(CollisionDirection.Top)
     if (FinalBoss == 1) {
         while (FinalBoss == 1) {
+            scene.setBackgroundImage(assets.image`myImage10`)
             pause(500)
+            scene.setBackgroundImage(assets.image`myImage6`)
             Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
+            pause(500)
         }
     }
 })
@@ -392,7 +400,7 @@ let mySprite: Sprite = null
 scene.setBackgroundColor(6)
 game.setDialogTextColor(6)
 game.setDialogFrame(assets.image`b`)
-game.showLongText("  The Kingfisher", DialogLayout.Center)
+game.showLongText("  The Kingfisher's     Dimensional Adventures", DialogLayout.Center)
 let ifrif = 0
 info.setScore(0)
 info.setLife(3)
