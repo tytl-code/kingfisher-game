@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const Teleporter = SpriteKind.create()
     export const Teleporter2 = SpriteKind.create()
     export const decor = SpriteKind.create()
+    export const mini = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter, function (sprite, otherSprite) {
     if (Lvl == 0) {
@@ -208,22 +209,22 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
     FinalBoss = 1
     statusbar = statusbars.create(100, 4, StatusBarKind.Health)
     statusbar.positionDirection(CollisionDirection.Top)
-    Boom_Boom.setPosition(200, 110)
     scene.cameraFollowSprite(Camera)
     if (FinalBoss == 1) {
+        cool_delete = 0
         while (FinalBoss == 1) {
             scene.setBackgroundImage(assets.image`myImage10`)
             pause(100)
+            cool_delete += 1
             scene.setBackgroundImage(assets.image`myImage6`)
-            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Projectile)
-            Boom_Boom.setPosition(200, 110)
+            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
+            sprites.destroy(Boom_Boom)
+            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
+            Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
             Boom_Boom.follow(mySprite)
-            pause(2000)
+            pause(500)
         }
     }
-})
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite, otherSprite) {
-    sprites.destroy(Boom_Boom)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     if (Boss2 == 1) {
@@ -364,19 +365,61 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite3, otherS
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
     scene.setBackgroundImage(assets.image`myImage6`)
-    tiles.setCurrentTilemap(tilemap`level51`)
-    scene.cameraFollowSprite(mySprite2)
-    mySprite2.setImage(assets.image`myImage7`)
-    Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Projectile)
+    tiles.setCurrentTilemap(tilemap`level28`)
+    Camera = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.decor)
+    Camera.setImage(img`
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
+        `)
+    sprites.destroy(Portal)
+    sprites.destroy(mySprite2)
     FinalBoss = 1
     statusbar = statusbars.create(100, 4, StatusBarKind.Health)
     statusbar.positionDirection(CollisionDirection.Top)
+    scene.cameraFollowSprite(Camera)
     if (FinalBoss == 1) {
+        cool_delete = 0
         while (FinalBoss == 1) {
             scene.setBackgroundImage(assets.image`myImage10`)
-            pause(500)
+            pause(100)
+            cool_delete += 1
             scene.setBackgroundImage(assets.image`myImage6`)
+            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
+            sprites.destroy(Boom_Boom)
+            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
             Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
+            Boom_Boom.follow(mySprite)
             pause(500)
         }
     }
@@ -424,6 +467,7 @@ let Down = 0
 let Up = 0
 let ifyfifrirfryfriyfir: Sprite = null
 let Boom_Boom: Sprite = null
+let cool_delete = 0
 let FinalBoss = 0
 let Camera: Sprite = null
 let Portal: Sprite = null
@@ -542,6 +586,15 @@ forever(function () {
 forever(function () {
     music.setVolume(255)
     game.setGameOverPlayable(false, music.melodyPlayable(music.wawawawaa), false)
+})
+forever(function () {
+    if (FinalBoss == 1) {
+        pause(100)
+        if (Boom_Boom.overlapsWith(projectile)) {
+            sprites.destroy(Boom_Boom)
+            info.changeScoreBy(1)
+        }
+    }
 })
 forever(function () {
     if (true) {
