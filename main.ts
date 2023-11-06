@@ -215,10 +215,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, 
         while (FinalBoss == 1) {
             scene.setBackgroundImage(assets.image`myImage10`)
             pause(100)
-            cool_delete += 1
             scene.setBackgroundImage(assets.image`myImage6`)
-            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
-            sprites.destroy(Boom_Boom)
             Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
             Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
             Boom_Boom.follow(mySprite)
@@ -486,6 +483,24 @@ let mySprite: Sprite = null
 scene.setBackgroundColor(6)
 game.setDialogTextColor(6)
 game.setDialogFrame(assets.image`b`)
+game.setDialogCursor(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . 1 1 1 1 1 1 . . . . . 
+    . . . . 1 6 6 6 6 6 6 1 . . . . 
+    . . . 1 6 6 1 1 1 1 6 6 1 . . . 
+    . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+    . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+    . . 1 6 6 1 1 1 1 1 1 6 6 1 . . 
+    . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+    . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+    . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+    . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+    . . . 1 6 6 6 6 6 6 6 6 1 . . . 
+    . . . . 1 6 6 6 6 6 6 1 . . . . 
+    . . . . . 1 1 1 1 1 1 . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `)
 game.showLongText("  The Kingfisher's     Dimensional Adventures", DialogLayout.Center)
 let ifrif = 0
 info.setScore(0)
@@ -586,6 +601,7 @@ forever(function () {
 forever(function () {
     music.setVolume(255)
     game.setGameOverPlayable(false, music.melodyPlayable(music.wawawawaa), false)
+    game.setGameOverScoringType(game.ScoringType.HighScore)
 })
 forever(function () {
     if (FinalBoss == 1) {
