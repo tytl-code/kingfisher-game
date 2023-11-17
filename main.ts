@@ -75,7 +75,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter, function (sprite, ot
         Lvl = 5
     } else if (Lvl == 5) {
         mySprite.setPosition(110, 200)
-        mySprite.setPosition(110, 20)
+        mySprite.setPosition(110, 30)
         tiles.setCurrentTilemap(tilemap`level18`)
         info.setLife(3)
         Spinman = sprites.create(img`
@@ -166,62 +166,29 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Teleporter, function (sprite, ot
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile19`, function (sprite, location) {
-    scene.setBackgroundImage(assets.image`myImage6`)
-    tiles.setCurrentTilemap(tilemap`level28`)
-    Camera = sprites.create(img`
+    game.setDialogTextColor(6)
+    game.setDialogFrame(assets.image`b`)
+    game.setDialogCursor(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
+        . . . . . 1 1 1 1 1 1 . . . . . 
+        . . . . 1 6 6 6 6 6 6 1 . . . . 
+        . . . 1 6 6 1 1 1 1 6 6 1 . . . 
+        . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+        . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+        . . 1 6 6 1 1 1 1 1 1 6 6 1 . . 
+        . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+        . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+        . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+        . . 1 6 6 1 6 6 6 6 1 6 6 1 . . 
+        . . . 1 6 6 6 6 6 6 6 6 1 . . . 
+        . . . . 1 6 6 6 6 6 6 1 . . . . 
+        . . . . . 1 1 1 1 1 1 . . . . . 
         . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.decor)
-    Camera.setImage(img`
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
         `)
-    sprites.destroy(Portal)
-    sprites.destroy(mySprite2)
-    FinalBoss = 1
-    statusbar = statusbars.create(100, 4, StatusBarKind.Health)
-    statusbar.positionDirection(CollisionDirection.Top)
-    scene.cameraFollowSprite(Camera)
-    if (FinalBoss == 1) {
-        cool_delete = 0
-        while (FinalBoss == 1) {
-            scene.setBackgroundImage(assets.image`myImage10`)
-            pause(100)
-            scene.setBackgroundImage(assets.image`myImage6`)
-            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
-            Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
-            Boom_Boom.follow(mySprite)
-            pause(500)
-        }
-    }
+    game.showLongText("Thx for playing", DialogLayout.Center)
+    game.setGameOverMessage(true, "GAME WIN!")
+    game.gameOver(true)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     if (Boss2 == 1) {
@@ -360,67 +327,6 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite3, otherS
         pause(1000)
     }
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile20`, function (sprite, location) {
-    scene.setBackgroundImage(assets.image`myImage6`)
-    tiles.setCurrentTilemap(tilemap`level28`)
-    Camera = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . . . . . . . . . 
-        `, SpriteKind.decor)
-    Camera.setImage(img`
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 6 
-        `)
-    sprites.destroy(Portal)
-    sprites.destroy(mySprite2)
-    FinalBoss = 1
-    statusbar = statusbars.create(100, 4, StatusBarKind.Health)
-    statusbar.positionDirection(CollisionDirection.Top)
-    scene.cameraFollowSprite(Camera)
-    if (FinalBoss == 1) {
-        cool_delete = 0
-        while (FinalBoss == 1) {
-            scene.setBackgroundImage(assets.image`myImage10`)
-            pause(100)
-            cool_delete += 1
-            scene.setBackgroundImage(assets.image`myImage6`)
-            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
-            sprites.destroy(Boom_Boom)
-            Boom_Boom = sprites.create(assets.image`myImage9`, SpriteKind.Enemy)
-            Boom_Boom.setPosition(randint(120, 300), randint(127, 200))
-            Boom_Boom.follow(mySprite)
-            pause(500)
-        }
-    }
-})
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite2, otherSprite2) {
     statusbar.value += -1
     info.changeScoreBy(1)
@@ -463,10 +369,6 @@ let Right = 0
 let Down = 0
 let Up = 0
 let ifyfifrirfryfriyfir: Sprite = null
-let Boom_Boom: Sprite = null
-let cool_delete = 0
-let FinalBoss = 0
-let Camera: Sprite = null
 let Portal: Sprite = null
 let Spin = 0
 let Spinman: Sprite = null
@@ -501,7 +403,7 @@ game.setDialogCursor(img`
     . . . . . 1 1 1 1 1 1 . . . . . 
     . . . . . . . . . . . . . . . . 
     `)
-game.showLongText("  The Kingfisher's     Dimensional Adventures", DialogLayout.Center)
+game.showLongText("  The Kingfisher", DialogLayout.Center)
 let ifrif = 0
 info.setScore(0)
 info.setLife(3)
@@ -604,7 +506,9 @@ forever(function () {
     game.setGameOverScoringType(game.ScoringType.HighScore)
 })
 forever(function () {
+    let FinalBoss = 0
     if (FinalBoss == 1) {
+        let Boom_Boom: Sprite = null
         pause(100)
         if (Boom_Boom.overlapsWith(projectile)) {
             sprites.destroy(Boom_Boom)
